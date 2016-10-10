@@ -66,5 +66,11 @@ def parse(source_code, print_function=None):
     return _parse(tokens, print_function)
 
 
-def tokenize(pouet, print_function=False):
-    return mark_indentation(inner_group(space_group(_tokenize(group(split(pouet)), print_function))))
+def tokenize(source_code, print_function=False):
+    split_source = split(source_code)
+    grouper_grouped = group(split_source)
+    tokenized = _tokenize(grouper_grouped, print_function)
+    space_grouped = space_group(tokenized)
+    inner_grouped = inner_group(space_grouped)
+    marked_indentations = mark_indentation(inner_grouped)
+    return marked_indentations
